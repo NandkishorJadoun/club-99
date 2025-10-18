@@ -7,6 +7,11 @@
   </head>
   <body>
     <h1>Homepage</h1>
+    <h2>
+      Welcome
+      <%= locals.user ? user.first_name : "Guest" %>
+    </h2>
     <a href="/sign-up">Sign Up</a>
+    <a href="/log-in">Log In</a>
   </body>
 </html>

@@ -4,7 +4,7 @@ const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 
 function getHomepage(req, res) {
-  res.render("home");
+  res.render("home", { user: req.user });
 }
 
 function getSignUp(req, res) {
@@ -33,8 +33,13 @@ const postSignUp = [
   },
 ];
 
+function getLogIn(req, res) {
+  res.render("log-in-form");
+}
+
 module.exports = {
   getHomepage,
   getSignUp,
   postSignUp,
+  getLogIn,
 };
