@@ -6,7 +6,7 @@ const alphaErr = "must only contain letters.";
 const lengthErr = "must be between 1 and 10 characters.";
 const emptyErr = "shouldn't be empty.";
 
-const validateSignUp = [
+const signUp = [
   body("firstName")
     .trim()
     .notEmpty()
@@ -58,7 +58,7 @@ const validateSignUp = [
     }),
 ];
 
-const validateMembership = [
+const membership = [
   body("membership").custom((password) => {
     if (password !== process.env.MEMBERSHIP_PW) {
       throw new Error("Invalid Membership Password");
@@ -67,7 +67,26 @@ const validateMembership = [
   }),
 ];
 
+const message = [
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage(`Title ${emptyErr}`)
+    .isAlpha("en-US", { ignore: " " })
+    .withMessage(`Title ${alphaErr}`)
+    .isLength({ max: 40 })
+    .withMessage("Title length must be smaller than 40 characters."),
+
+  body("message")
+    .trim()
+    .notEmpty()
+    .withMessage(`Message ${emptyErr}`)
+    .isLength({ max: 300 })
+    .withMessage("Message length must be smaller than 300 characters."),
+];
+
 module.exports = {
-  validateSignUp,
-  validateMembership
+  signUp,
+  membership,
+  message,
 };

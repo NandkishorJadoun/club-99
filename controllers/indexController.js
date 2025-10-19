@@ -1,10 +1,7 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
-const {
-  validateSignUp,
-  validateMembership,
-} = require("../middlewares/validator");
+const validate = require("../middlewares/validator");
 const { validationResult, matchedData } = require("express-validator");
 
 function getHomepage(req, res) {
@@ -16,7 +13,7 @@ function getSignUp(req, res) {
 }
 
 const postSignUp = [
-  validateSignUp,
+  validate.signUp,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -60,7 +57,7 @@ function membershipGet(req, res) {
 }
 
 const membershipPost = [
-  validateMembership,
+  validate.membership,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -75,6 +72,27 @@ const membershipPost = [
   },
 ];
 
+function messageGet(req, res) {
+  res.render("message-form");
+}
+
+const messagePost = [
+  validate.message,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("message-form", {
+        errors: errors.array(),
+      });
+    }
+
+    const { id } = req.user;
+    const { title, message } = req.body;
+    await db.insertNewMessage(message, title, id);
+    res.redirect("/");
+  },
+];
+
 module.exports = {
   getHomepage,
   getSignUp,
@@ -83,4 +101,6 @@ module.exports = {
   getLogOut,
   membershipGet,
   membershipPost,
+  messageGet,
+  messagePost,
 };

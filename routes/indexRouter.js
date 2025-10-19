@@ -18,7 +18,8 @@ indexRouter.post(
 );
 indexRouter.get("/log-out", isAuth, indexController.getLogOut);
 indexRouter.get("/membership", isAuth, indexController.membershipGet);
-
-indexRouter.post("/membership", indexController.membershipPost)
+indexRouter.post("/membership", indexController.membershipPost);
+indexRouter.get("/message", isAuth, indexController.messageGet);
+indexRouter.post("/message", indexController.messagePost);
 
 module.exports = indexRouter;
