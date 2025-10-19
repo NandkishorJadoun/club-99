@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const indexController = require("../controllers/indexController");
 const passport = require("../middlewares/passport");
+const isAuth = require("../middlewares/authMiddleware");
 
 const indexRouter = new Router();
 
@@ -15,6 +16,9 @@ indexRouter.post(
     failureRedirect: "/log-in",
   }),
 );
-indexRouter.get("/log-out", indexController.getLogOut);
+indexRouter.get("/log-out", isAuth, indexController.getLogOut);
+indexRouter.get("/membership", isAuth, indexController.membershipGet);
+
+indexRouter.post("/membership", indexController.membershipPost)
 
 module.exports = indexRouter;

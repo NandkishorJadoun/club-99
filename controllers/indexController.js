@@ -1,8 +1,11 @@
-const { validateSignUp } = require("../middlewares/validator");
-const { validationResult, matchedData } = require("express-validator");
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
+const {
+  validateSignUp,
+  validateMembership,
+} = require("../middlewares/validator");
+const { validationResult, matchedData } = require("express-validator");
 
 function getHomepage(req, res) {
   res.render("home", { user: req.user });
@@ -52,10 +55,32 @@ function getLogOut(req, res, next) {
   });
 }
 
+function membershipGet(req, res) {
+  res.render("membership-form");
+}
+
+const membershipPost = [
+  validateMembership,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("membership-form", {
+        errors: errors.array(),
+      });
+    }
+
+    const { id } = req.user;
+    await db.updateMembership(id);
+    res.redirect("/");
+  },
+];
+
 module.exports = {
   getHomepage,
   getSignUp,
   postSignUp,
   getLogIn,
   getLogOut,
+  membershipGet,
+  membershipPost,
 };

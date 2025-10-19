@@ -58,6 +58,16 @@ const validateSignUp = [
     }),
 ];
 
+const validateMembership = [
+  body("membership").custom((password) => {
+    if (password !== process.env.MEMBERSHIP_PW) {
+      throw new Error("Invalid Membership Password");
+    }
+    return true;
+  }),
+];
+
 module.exports = {
   validateSignUp,
+  validateMembership
 };
