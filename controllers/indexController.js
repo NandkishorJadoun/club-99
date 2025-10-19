@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
+const passport = require("../middlewares/passport");
 const CustomNotFoundError = require("../errors/CustomNotFoundError");
 const validate = require("../middlewares/validator");
 const { validationResult, matchedData } = require("express-validator");
@@ -41,6 +42,24 @@ const postSignUp = [
 
 function getLogIn(req, res) {
   res.render("log-in-form");
+}
+
+function postLogIn(req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render("log-in-form", { info });
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/");
+    });
+  })(req, res, next);
 }
 
 function getLogOut(req, res, next) {
@@ -98,6 +117,7 @@ module.exports = {
   getSignUp,
   postSignUp,
   getLogIn,
+  postLogIn,
   getLogOut,
   membershipGet,
   membershipPost,
