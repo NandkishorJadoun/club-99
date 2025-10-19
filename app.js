@@ -33,6 +33,11 @@ app.use((req, res, next) => {
 
 app.use(indexRouter);
 
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(err.statusCode || 500).send(err.message);
+});
+
 app.listen(3000, (error) => {
   if (error) {
     throw error;
