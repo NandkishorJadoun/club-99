@@ -6,6 +6,7 @@
     <title>Membership Form</title>
   </head>
   <body>
+    <%- include("partials/header") %>
     <form action="/membership" method="POST">
       <p>
         <label for="membership">Membership Code: </label>
@@ -16,5 +17,6 @@
         <button type="submit">Submit</button>
       </p>
     </form>
+    <%- include("partials/errors.ejs") %>
   </body>
 </html>

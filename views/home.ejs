@@ -6,20 +6,10 @@
     <title>Home</title>
   </head>
   <body>
-    <h1>Homepage</h1>
+    <%- include("partials/header") %>
     <h2>
       Welcome
       <%= currentUser ? currentUser.first_name : "Guest" %>
     </h2>
-
-    <nav>
-      <% if(!currentUser){ %>
-      <a href="/sign-up">Sign Up</a>
-      <a href="/log-in">Log In</a>
-      <% } else { %>
-      <a href="/message">New Message</a>
-      <a href="/log-out">Log Out</a>
-      <% } %>
-    </nav>
   </body>
 </html>

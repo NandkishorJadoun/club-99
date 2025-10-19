@@ -6,6 +6,7 @@
     <title>Message Form</title>
   </head>
   <body>
+    <%- include("partials/header") %>
     <form action="/message" method="POST">
       <p>
         <label for="title">Title: </label>
@@ -20,5 +21,6 @@
         <button type="submit">Submit</button>
       </p>
     </form>
+    <%- include("partials/errors.ejs") %>
   </body>
 </html>

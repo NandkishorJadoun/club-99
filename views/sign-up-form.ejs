@@ -6,6 +6,7 @@
     <title>Sign Up</title>
   </head>
   <body>
+    <%- include("partials/header") %>
     <form action="/sign-up" method="POST">
       <p>
         <label for="firstName">First Name: </label>
@@ -53,13 +54,7 @@
       </p>
     </form>
 
-    <% if(locals.errors){ %>
-    <ul>
-      <% errors.forEach(function(error) { %>
-      <li><%= error.msg %></li>
-      <% }) %>
-    </ul>
-    <% } %>
+    <%- include("partials/errors.ejs") %>
 
     <script>
       const isAdmin = document.querySelector("#is-admin");

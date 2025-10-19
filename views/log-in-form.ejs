@@ -6,6 +6,7 @@
     <title>Log in</title>
   </head>
   <body>
+    <%- include("partials/header") %>
     <form action="/log-in" method="POST">
       <p>
         <label for="email">Email: </label>
@@ -22,5 +23,14 @@
         <button type="submit">Submit</button>
       </p>
     </form>
+
+    <% if(locals.info){ %>
+    <ul>
+      <li>
+        <%= info.message %>
+      </li>
+    </ul>
+    <% } %>
+
   </body>
 </html>
