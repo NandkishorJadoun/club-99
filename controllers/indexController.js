@@ -2,6 +2,7 @@ const { validateSignUp } = require("../middlewares/validator");
 const { validationResult, matchedData } = require("express-validator");
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
+const CustomNotFoundError = require("../errors/CustomNotFoundError");
 
 function getHomepage(req, res) {
   res.render("home", { user: req.user });
@@ -25,6 +26,11 @@ const postSignUp = [
       matchedData(req);
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!hashedPassword) {
+      throw new CustomNotFoundError("Hashing Password is not working");
+    }
+
     const isAdmin = Boolean(adminPassword);
 
     await db.insertNewUser(firstName, lastName, email, hashedPassword, isAdmin);
