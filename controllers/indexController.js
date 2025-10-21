@@ -8,16 +8,11 @@ const { validationResult, matchedData } = require("express-validator");
 async function getHomepage(req, res) {
   const messages = await db.getAllMessages();
 
-  const isMemberOrAdmin =
-    req.isAuthenticated() && (req.user.is_member || req.user.is_admin);
-
-  const isAdmin = req.isAuthenticated() && req.user.is_admin;
-
   if (!messages) {
     throw new CustomNotFoundError("No Messages Found!");
   }
 
-  res.render("home", { messages, isMemberOrAdmin, isAdmin });
+  res.render("home", { messages });
 }
 
 function getSignUp(req, res) {

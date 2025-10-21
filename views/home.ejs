@@ -6,21 +6,27 @@
     <title>Home</title>
   </head>
   <body>
+    <% const isMemberOrAdmin = currentUser && (currentUser.is_member || currentUser.is_admin) %>
+    <% const isAdmin = currentUser && currentUser.is_admin %>
+    <% const isNotMember = currentUser && !currentUser.is_member %>
+
     <%- include("partials/header") %>
     <h2>
       Welcome
       <%= currentUser ? currentUser.first_name : "Guest" %>
     </h2>
 
+    <% if(isNotMember){ %>
+    <a href="/membership">Become Member</a>
+    <% } %>
+
     <div>
       <% messages.forEach(function(msg){ %>
       <div>
         <p><%= msg.title %></p>
         <p><%= msg.message %></p>
-        <p>
-          <%= isMemberOrAdmin ? (msg.first_name + " " + msg.last_name) : "Secret User" %>
-        </p>
-
+        <% const fullName = msg.first_name + " " + msg.last_name %>
+        <p><%= isMemberOrAdmin ? fullName : "Secret User" %></p>
         <p><%= isMemberOrAdmin ? msg.timestamp : "Secret Time" %></p>
 
         <% if(isAdmin) { %>
