@@ -14,5 +14,6 @@ indexRouter.get("/membership", isAuth, indexController.membershipGet);
 indexRouter.post("/membership", indexController.membershipPost);
 indexRouter.get("/message", isAuth, indexController.messageGet);
 indexRouter.post("/message", indexController.messagePost);
+indexRouter.post("/message/:msgId/delete", indexController.deleteMessage);
 
 module.exports = indexRouter;

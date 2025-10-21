@@ -18,16 +18,16 @@
         <p><%= msg.title %></p>
         <p><%= msg.message %></p>
         <p>
-          <%= currentUser && (currentUser.is_member || currentUser.is_admin) ?
-          msg.first_name + msg.last_name : "Anonymous User" %>
+          <%= isMemberOrAdmin ? (msg.first_name + " " + msg.last_name) : "Secret User" %>
         </p>
 
-        <p>
-          <%= currentUser && (currentUser.is_member || currentUser.is_admin) ?
-          msg.timestamp : "Secret Time" %>
-        </p>
+        <p><%= isMemberOrAdmin ? msg.timestamp : "Secret Time" %></p>
 
-        <a href="message/<%= msg.id%>/delete">Delete</a>
+        <% if(isAdmin) { %>
+        <form action="message/<%= msg.id%>/delete" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
       </div>
       <% })%>
     </div>

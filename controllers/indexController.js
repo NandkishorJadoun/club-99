@@ -8,11 +8,16 @@ const { validationResult, matchedData } = require("express-validator");
 async function getHomepage(req, res) {
   const messages = await db.getAllMessages();
 
+  const isMemberOrAdmin =
+    req.isAuthenticated() && (req.user.is_member || req.user.is_admin);
+
+  const isAdmin = req.isAuthenticated() && req.user.is_admin;
+
   if (!messages) {
     throw new CustomNotFoundError("No Messages Found!");
   }
 
-  res.render("home", { messages });
+  res.render("home", { messages, isMemberOrAdmin, isAdmin });
 }
 
 function getSignUp(req, res) {
@@ -118,6 +123,12 @@ const messagePost = [
   },
 ];
 
+async function deleteMessage(req, res) {
+  const { msgId } = req.params;
+  await db.deleteMessage(msgId);
+  res.redirect("/");
+}
+
 module.exports = {
   getHomepage,
   getSignUp,
@@ -129,4 +140,5 @@ module.exports = {
   membershipPost,
   messageGet,
   messagePost,
+  deleteMessage,
 };
