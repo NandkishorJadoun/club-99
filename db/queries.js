@@ -41,10 +41,20 @@ async function insertNewMessage(...msgInfo) {
   );
 }
 
+async function getAllMessages() {
+  const { rows } = await pool.query(`
+    SELECT messages.id, title, message, first_name, last_name,timestamp
+    FROM messages 
+    JOIN users ON messages.user_id = users.id;`);
+
+  return rows;
+}
+
 module.exports = {
   insertNewUser,
   getUserByEmail,
   getUserById,
   updateMembership,
-  insertNewMessage
+  insertNewMessage,
+  getAllMessages,
 };

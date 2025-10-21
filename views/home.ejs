@@ -11,5 +11,25 @@
       Welcome
       <%= currentUser ? currentUser.first_name : "Guest" %>
     </h2>
+
+    <div>
+      <% messages.forEach(function(msg){ %>
+      <div>
+        <p><%= msg.title %></p>
+        <p><%= msg.message %></p>
+        <p>
+          <%= currentUser && (currentUser.is_member || currentUser.is_admin) ?
+          msg.first_name + msg.last_name : "Anonymous User" %>
+        </p>
+
+        <p>
+          <%= currentUser && (currentUser.is_member || currentUser.is_admin) ?
+          msg.timestamp : "Secret Time" %>
+        </p>
+
+        <a href="message/<%= msg.id%>/delete">Delete</a>
+      </div>
+      <% })%>
+    </div>
   </body>
 </html>

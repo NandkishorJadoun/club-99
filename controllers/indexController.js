@@ -5,8 +5,14 @@ const CustomNotFoundError = require("../errors/CustomNotFoundError");
 const validate = require("../middlewares/validator");
 const { validationResult, matchedData } = require("express-validator");
 
-function getHomepage(req, res) {
-  res.render("home", { user: req.user });
+async function getHomepage(req, res) {
+  const messages = await db.getAllMessages();
+
+  if (!messages) {
+    throw new CustomNotFoundError("No Messages Found!");
+  }
+
+  res.render("home", { messages });
 }
 
 function getSignUp(req, res) {
