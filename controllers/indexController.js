@@ -16,7 +16,11 @@ async function getHomepage(req, res) {
 }
 
 function getSignUp(req, res) {
-  res.render("sign-up-form");
+  if (req.isAuthenticated()) {
+    res.redirect("/");
+  } else {
+    res.render("sign-up-form");
+  }
 }
 
 const postSignUp = [
@@ -47,7 +51,11 @@ const postSignUp = [
 ];
 
 function getLogIn(req, res) {
-  res.render("log-in-form");
+  if (req.isAuthenticated()) {
+    res.redirect("/");
+  } else {
+    res.render("log-in-form");
+  }
 }
 
 function postLogIn(req, res, next) {
