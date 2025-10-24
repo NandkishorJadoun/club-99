@@ -130,6 +130,10 @@ main {
     gap: 0.75rem;
 }
 
+.message-container form{
+    border: 0;
+}
+
 .msg-heading {
     text-align: center;
     font-weight: bold;
@@ -209,3 +213,4 @@ button {
 .admin-checkbox{
     margin: 0 auto;
 }
+
