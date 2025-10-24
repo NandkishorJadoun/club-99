@@ -130,7 +130,7 @@ main {
     gap: 0.75rem;
 }
 
-.message-container form{
+.message-container form {
     border: 0;
 }
 
@@ -163,7 +163,7 @@ main {
     padding: 0 1rem;
 }
 
-.form h2{
+.form h2 {
     padding-bottom: 0.5rem;
     text-align: center;
 }
@@ -180,7 +180,7 @@ form>p {
     display: grid;
     gap: 4px;
     grid-template-columns: auto 1fr;
-    align-items: center;
+    align-items: start;
 }
 
 form>p:last-of-type {
@@ -188,11 +188,17 @@ form>p:last-of-type {
     padding-top: 0.5rem;
 }
 
-input {
+input,
+textarea {
     background-color: var(--main-black);
     border: solid 1px var(--main-white);
     color: var(--main-white);
     padding: 2px 4px;
+}
+
+textarea{
+    max-height: 150px;
+    resize: vertical;
 }
 
 button {
@@ -205,12 +211,11 @@ button {
     cursor: pointer;
 }
 
-.error-list{
+.error-list {
     color: red;
     padding: 0.5rem 1rem;
 }
 
-.admin-checkbox{
+.admin-checkbox {
     margin: 0 auto;
 }
-
