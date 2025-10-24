@@ -4,38 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <% const isMemberOrAdmin = currentUser && (currentUser.is_member || currentUser.is_admin) %>
     <% const isAdmin = currentUser && currentUser.is_admin %>
-    <% const isNotMember = currentUser && !currentUser.is_member %>
 
     <%- include("partials/header") %>
-    <h2>
-      Welcome
-      <%= currentUser ? currentUser.first_name : "Guest" %>
-    </h2>
-
-    <% if(isNotMember){ %>
-    <a href="/membership">Become Member</a>
-    <% } %>
-
-    <div>
-      <% messages.forEach(function(msg){ %>
-      <div>
-        <p><%= msg.title %></p>
-        <p><%= msg.message %></p>
-        <% const fullName = msg.first_name + " " + msg.last_name %>
-        <p><%= isMemberOrAdmin ? fullName : "Secret User" %></p>
-        <p><%= isMemberOrAdmin ? msg.timestamp : "Secret Time" %></p>
-
-        <% if(isAdmin) { %>
-        <form action="message/<%= msg.id%>/delete" method="POST">
-          <button type="submit">Delete</button>
-        </form>
+    <main>
+      <div class="welcome-card">
+        <h2>
+          Welcome
+          <span class="username">
+            <%= currentUser ? currentUser.first_name : "Guest" %>
+          </span>
+        </h2>
+        <% if(currentUser){%>
+        <a href="/message" class="create-message">Create Message</a>
         <% } %>
       </div>
-      <% })%>
-    </div>
+
+      <div class="message-container">
+        <p class="msg-heading">Messages</p>
+        <% messages.forEach(function(msg){ %>
+        <div class="message-card">
+          <h3><%= msg.title %></h3>
+          <p class="message"><%= msg.message %></p>
+          <% const fullName = msg.first_name + " " + msg.last_name %>
+          <p class="message-username">~ <%= isMemberOrAdmin ? fullName : "Anonymous User" %></p>
+          <p class="message-timestamp"><%= isMemberOrAdmin ? msg.timestamp : "Hidden Time" %></p>
+
+          <% if(isAdmin) { %>
+          <form action="message/<%= msg.id%>/delete" method="POST">
+            <button type="submit">Delete</button>
+          </form>
+          <% } %>
+        </div>
+        <% })%>
+      </div>
+    </main>
   </body>
 </html>

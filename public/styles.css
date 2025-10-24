@@ -1,0 +1,211 @@
+:root {
+    --main-black: #0A0A0A;
+    --main-white: #ECECEC;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: var(--main-black);
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+p,
+a,
+h1,
+h2,
+h3,
+h4 {
+    color: var(--main-white);
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: solid hsla(0, 0%, 93%, 0.6) 1px;
+    position: fixed;
+    padding: 0.8rem;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 60px;
+    backdrop-filter: blur(20px);
+}
+
+nav {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-weight: bold;
+}
+
+.login {
+    color: var(--main-black);
+    background-color: var(--main-white);
+    padding: 4px 12px;
+    border-radius: 1rem;
+}
+
+main {
+    padding: 0.8rem;
+    padding-top: 60px;
+}
+
+.username {
+    position: relative;
+}
+
+.username::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(145deg, #4343ff, #9333FF 35%, #FF7B00 75%, #FF0077);
+    border-radius: 3px;
+}
+
+.welcome-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.become-member-btn {
+    position: relative;
+    color: var(--main-black);
+    background-color: var(--main-white);
+    padding: 4px 12px;
+    border-radius: 10rem;
+    font-weight: bold;
+    transition: all 0.2s ease-out;
+}
+
+.become-member-btn::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 1px;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 10rem;
+    z-index: -1;
+    background: linear-gradient(to bottom right, #4343ff, #9333FF 35%, #FF7B00 75%, #FF0077);
+}
+
+.become-member-btn:hover {
+    box-shadow: 40px 0 100px rgba(255, 0, 119, 0.5), -40px 0 100px rgba(66, 66, 255, 0.75);
+}
+
+.create-message {
+    font-weight: bold;
+    color: var(--main-black);
+    background-color: var(--main-white);
+    padding: 4px 12px;
+    border-radius: 10rem;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.msg-heading {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.message-card {
+    border: solid 1px var(--main-white);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message {
+    color: rgba(236, 236, 236, 0.8);
+}
+
+.message-username,
+.message-timestamp {
+    text-align: end;
+    color: rgba(236, 236, 236, 0.9);
+}
+
+.form {
+    align-self: center;
+    padding: 0 1rem;
+}
+
+.form h2{
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
+
+form {
+    border: solid var(--main-white) 1px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form>p {
+    display: grid;
+    gap: 4px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+form>p:last-of-type {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 0.5rem;
+}
+
+input {
+    background-color: var(--main-black);
+    border: solid 1px var(--main-white);
+    color: var(--main-white);
+    padding: 2px 4px;
+}
+
+button {
+    font-weight: bold;
+    background-color: var(--main-white);
+    color: var(--main-black);
+    border: solid 1px var(--main-black);
+    padding: 2px 0;
+    border-radius: 8rem;
+    cursor: pointer;
+}
+
+.error-list{
+    color: red;
+    padding: 0.5rem 1rem;
+}
+
+.admin-checkbox{
+    margin: 0 auto;
+}

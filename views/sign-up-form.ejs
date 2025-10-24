@@ -4,58 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
     <%- include("partials/header") %>
-    <form action="/sign-up" method="POST">
-      <p>
-        <label for="firstName">First Name: </label>
-        <input type="text" name="firstName" id="firstName" placeholder="John" />
-      </p>
+    <main class="form">
 
-      <p>
-        <label for="lastName">Last Name: </label>
-        <input type="text" name="lastName" id="lastName" placeholder="Doe" />
-      </p>
+      <h2>Sign Up Form</h2>
+      <form action="/sign-up" method="POST">
+        <p>
+          <label for="firstName">First Name: </label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="John"
+          />
+        </p>
 
-      <p>
-        <label for="email">Email: </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="johndoe@email.com"
-        />
-      </p>
+        <p>
+          <label for="lastName">Last Name: </label>
+          <input type="text" name="lastName" id="lastName" placeholder="Doe" />
+        </p>
 
-      <p>
-        <label for="password">Enter Password: </label>
-        <input type="password" name="password" id="password" />
-      </p>
+        <p>
+          <label for="email">Email: </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="johndoe@email.com"
+          />
+        </p>
 
-      <p>
-        <label for="confirmPassword">Confirm Password: </label>
-        <input type="password" name="confirmPassword" id="confirmPassword" />
-      </p>
+        <p>
+          <label for="password">Enter Password: </label>
+          <input type="password" name="password" id="password" />
+        </p>
 
-      <p class="admin-checkbox">
-        <input type="checkbox" id="is-admin" />
-        <label for="is-admin">Yes, I am the Admin!</label>
-      </p>
+        <p>
+          <label for="confirmPassword">Confirm Password: </label>
+          <input type="password" name="confirmPassword" id="confirmPassword" />
+        </p>
 
-      <p class="admin-password-section">
-        <label for="adminPassword">Admin Password: </label>
-        <input type="password" name="adminPassword" id="adminPassword" />
-      </p>
+        <p class="admin-checkbox">
+          <input type="checkbox" id="is-admin" />
+          <label for="is-admin">Yes, I am the Admin!</label>
+        </p>
 
-      <p>
-        <button onclick="window.location.href='/'" type="button">Quit</button>
-        <button type="submit">Submit</button>
-      </p>
-    </form>
+        <p class="admin-password-section">
+          <label for="adminPassword">Admin Password: </label>
+          <input type="password" name="adminPassword" id="adminPassword" />
+        </p>
 
-    <%- include("partials/errors.ejs") %>
-
+        <p>
+          <button onclick="window.location.href='/'" type="button">Quit</button>
+          <button type="submit">Submit</button>
+        </p>
+      </form>
+      <%- include("partials/errors.ejs") %>
+    </main>
     <script>
       const isAdmin = document.querySelector("#is-admin");
       const adminPasswordSection = document.querySelector(
@@ -65,7 +73,7 @@
       adminPasswordSection.style.display = "none";
 
       isAdmin.addEventListener("change", () => {
-        adminPasswordSection.style.display = isAdmin.checked ? "block" : "none";
+        adminPasswordSection.style.display = isAdmin.checked ? "grid" : "none";
       });
     </script>
   </body>
