@@ -81,8 +81,8 @@ const message = [
     .trim()
     .notEmpty()
     .withMessage(`Message ${emptyErr}`)
-    .isLength({ max: 300 })
-    .withMessage("Message length must be smaller than 300 characters."),
+    .isLength({ max: 1000 })
+    .withMessage("Message length must be smaller than 1000 characters."),
 ];
 
 module.exports = {
