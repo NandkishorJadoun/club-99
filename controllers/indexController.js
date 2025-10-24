@@ -86,7 +86,11 @@ function getLogOut(req, res, next) {
 }
 
 function membershipGet(req, res) {
-  res.render("membership-form");
+  if(req.user.is_member){
+    res.redirect("/")
+  } else{
+    res.render("membership-form");
+  }
 }
 
 const membershipPost = [
